@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EF7343CE-B57E-4036-8FE8-6F2B70C52BC4}</ProjectGuid>
+    <ProjectGuid>{1961EE1D-8A72-450E-9ED3-0625FCF05A92}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HomeWork6</RootNamespace>
-    <AssemblyName>HomeWork6</AssemblyName>
+    <RootNamespace>HomeWork7</RootNamespace>
+    <AssemblyName>HomeWork7</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,12 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Models\Basket.cs" />
+    <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
-    <Compile Include="Starter.cs" />
+    <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\ProductService.cs" />
+    <Compile Include="Services\ShopService.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
