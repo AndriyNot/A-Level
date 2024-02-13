@@ -14,35 +14,36 @@ namespace HomeWork11
 {
     public class App
     {
+        private readonly ILoggerService _loggerService;
 
-        private readonly LoggerService _loggerService;
-
-        public App(LoggerService loggerService)
+       
+        public App(ILoggerService loggerService) 
         {
             _loggerService = loggerService;
+           
         }
-
         public void Start()
         { 
             ElectronicDeviceRepository repository = new ElectronicDeviceRepository();
             ElectronicServices services = new ElectronicServices(repository);
+            
             services.PlugInAllDevices();
-            _loggerService.LogInformation("\nSorting Appliances\n");
-            Console.WriteLine("\nSorting Appliances\n");
+            _loggerService.Log("\nSorting Appliances\n");
             services.SortDevicesByName();
+            //services.SetDefaultDeviceAt(2);
             foreach (var item in services.ElectronicsInApartment)
             {
                 Console.WriteLine(item.Display());
             }
 
-            int total = services.ElectricityUsageCalculator();
-            Console.WriteLine("\nTotal Electricity Consumption:" + total);
+            services.ElectricityUsageCalculator();
+            Console.WriteLine("\nTotal Electricity Consumption:");
 
             Console.WriteLine("\nEnter the device name for searching.");
-            string savingName = Console.ReadLine();
-            services.SearchDeviceByName(savingName);
+            string searchedDeviceName = Console.ReadLine();
+            services.SearchDeviceByName(searchedDeviceName);
 
-            repository.AddDeviceToDatabase(services.ElectronicsInApartment);
+            //repository.AddDeviceToDatabase(services.ElectronicsInApartment);
         }
     }
 }

@@ -5,8 +5,8 @@
 
     public interface IElectronicDeviceRepository
     {
-        IElectronicDeviceService[] CreatedElectronicDevices();
+        List<IElectronicDeviceService> CreatedElectronicDevices();
 
-        DeviceEntity[] AddDeviceToDatabase(IElectronicDeviceService[] electronicDevices);
+        List<DeviceEntity> AddDeviceToDatabase(List<IElectronicDeviceService> electronicDevices);
     }   
 }

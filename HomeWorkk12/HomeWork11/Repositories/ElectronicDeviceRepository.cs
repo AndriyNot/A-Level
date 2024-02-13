@@ -3,13 +3,14 @@
     using HomeWork11.Entity;
     using HomeWork11.Models;
     using HomeWork11.Repositories.Abstractions;
+    using HomeWork11.Services;
     using HomeWork11.Services.Abstractions;
 
     public class ElectronicDeviceRepository : IElectronicDeviceRepository
     {
-        public IElectronicDeviceService[] CreatedElectronicDevices()
+        public List<IElectronicDeviceService> CreatedElectronicDevices()
         {
-            return new IElectronicDeviceService[]
+            return new List<IElectronicDeviceService>
             {
                 new EntertainmentAppliance("samsungtv", 0, 2, true),
                 new EntertainmentAppliance("asus laptop", 100, 4, true),
@@ -27,9 +28,9 @@
 
         }
 
-        public DeviceEntity[] AddDeviceToDatabase(IElectronicDeviceService[] electronicDevices)
+        public List<DeviceEntity> AddDeviceToDatabase(List<IElectronicDeviceService> electronicDevices)
         {
-            List<DeviceEntity> deviceEntities = new List<DeviceEntity>();
+            CollectionCustom<DeviceEntity> deviceEntities = new CollectionCustom<DeviceEntity>();
 
             foreach (var electronicDevice in electronicDevices)
             {
@@ -43,7 +44,7 @@
                 deviceEntities.Add(deviceEntity);
             }
 
-            return deviceEntities.ToArray();
+            return deviceEntities;
         }
 
     }

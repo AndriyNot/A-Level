@@ -8,31 +8,26 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
+using HomeWork11.Models;
 
 void ConfigureServices(ServiceCollection serviceCollection, IConfiguration configuration)
 {
     serviceCollection.AddOptions<LoggingSettings>().Bind(configuration.GetSection("Logger"));
 
-    serviceCollection.AddScoped<LoggerService>();
 
-    serviceCollection.AddSingleton<IConfiguration>(configuration);
 
-    serviceCollection.AddLogging(builder =>
-    {
-        builder.AddConfiguration(configuration.GetSection("Logging"));
-        builder.AddConsole();
-    })
-
-        .AddScoped<IElectronicServices, ElectronicServices>()
-        .AddScoped<IElectronicDeviceRepository, ElectronicDeviceRepository>()
-         
-        .AddScoped<App>();
+        serviceCollection.AddTransient<IElectronicDeviceService, ElectronicDevice>()
+        .AddTransient<IElectronicDeviceRepository, ElectronicDeviceRepository>()
+        .AddTransient<IElectronicServices, ElectronicServices>()
+        .AddTransient<ILoggerService, LoggerService>()
+        .AddTransient<App>();
+    
     
 }
 
 
         var configuration = new ConfigurationBuilder()
-        .AddJsonFile(@"F:\codingC#\HomeProjects\HomeWork11\HomeWork11\config.json")
+        .AddJsonFile(@"F:\codingC#\HomeProjects\HomeWorkk11\HomeWork11\config.json")
         .Build();
 
 

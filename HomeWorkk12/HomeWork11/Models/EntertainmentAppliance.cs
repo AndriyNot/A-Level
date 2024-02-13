@@ -2,7 +2,7 @@
 {
     public class EntertainmentAppliance : ElectronicDevice
     {
-        public bool SupportsWiFi { get; set; }
+        public bool IsSupportsWiFi { get; set; }
 
         public int NumberOfSpeakers { get; set; }
 
@@ -10,12 +10,12 @@
             : base(name, powerConsumption)
         {
             NumberOfSpeakers = numberOfSpeakers;
-            SupportsWiFi = supportsWiFi;
+            IsSupportsWiFi = supportsWiFi;
         }
 
         public override string Display()
         {
-            return $"{base.Display()}, supports WiFi:{(SupportsWiFi ? "yes" : "no")}, number of Speakers:{NumberOfSpeakers}";
+            return $"{base.Display()}, supports WiFi:{(IsSupportsWiFi ? "yes" : "no")}, number of Speakers:{NumberOfSpeakers}";
         }
     }
 }
