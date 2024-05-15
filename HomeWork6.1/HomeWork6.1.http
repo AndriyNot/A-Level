@@ -1,0 +1,6 @@
+@HomeWork6._1_HostAddress = http://localhost:5094
+
+GET http://localhost:5094/product
+Accept: application/json
+
+###
