@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cardsPerPage = 3; 
+        const cardRow = document.getElementById("card-row");
+        const previousBtn = document.getElementById("previous-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const paginationLinks = document.querySelectorAll(
+          ".pagination a[data-page]"
+        );
+
+        let currentPage = 1;
+        let totalPages = Math.ceil(cardRow.children.length / cardsPerPage);
+
+        function updatePagination() {
+          paginationLinks.forEach((link) =>
+            link.parentElement.classList.remove("active")
+          );
+          paginationLinks[currentPage - 1].parentElement.classList.add(
+            "active"
+          );
+
+          if (currentPage === 1) {
+            previousBtn.classList.add("disabled");
+          } else {
+            previousBtn.classList.remove("disabled");
+          }
+
+          if (currentPage === totalPages) {
+            nextBtn.classList.add("disabled");
+          } else {
+            nextBtn.classList.remove("disabled");
+          }
+        }
+
+        function showCards() {
+          for (let i = 0; i < cardRow.children.length; i++) {
+            if (
+              i < (currentPage - 1) * cardsPerPage ||
+              i >= currentPage * cardsPerPage
+            ) {
+              cardRow.children[i].classList.add("d-none");
+            } else {
+              cardRow.children[i].classList.remove("d-none");
+            }
+          }
+        }
+
+        previousBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            updatePagination();
+            showCards();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            updatePagination();
+            showCards();
+          }
+        });
+
+        paginationLinks.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            currentPage = parseInt(event.target.dataset.page);
+            updatePagination();
+            showCards();
+          });
+        });
+
+        updatePagination();
+        showCards();
+      });
+    </script>
+        <title>My website</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="Users.html">
+                    <img
+                    src="logo.png"
+                    alt=""
+                    width="40"
+                    height="40"
+                    class="d-inline-block align-text-top"
+                    />
+                    My website
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-togle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="Users.html">Users</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                  </ul>
+              </div> 
+          </div>
+      </nav>
+        <div class="container mt-3">
+            <ul class="nav nav-tabs mb-3">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    data-bs-target="#tab-home"
+                  >
+                    Users
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#tab-profile"
+                    >
+                      Add user
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-home">
+                    <div class="row row-cols-3" id="card-row">
+                        <div class="col">
+                            <div class="card">
+                              <img
+                                src="https://static.tildacdn.com/tild3033-6433-4366-a438-376136383466/DHS_2271_W.jpg"
+                                class="card-img-top"
+                                alt="..."
+                                height="500"
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">Robert Green</h5>
+                                <p class="card-text">Id:1</p>
+                                <p class="card-text">Age:33</p>
+                                <p class="card-text">Email:robertGreen@reqres.in</p>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                              <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkafbrbV2Vdz628NO_yG_iD-iqZaDPhBkYOWA6HxZtaerydqp9uA0e-cQ3w3NsDfLq5oA&usqp=CAU"
+                                class="card-img-top"
+                                alt="..."
+                                height="500"
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">Diana Brown</h5>
+                                <p class="card-text">Id:2</p>
+                                <p class="card-text">Age:21</p>
+                                <p class="card-text">Email:browndiana@reqres.in</p>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                              <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiOqa_KcfXYvXli5XvzJcqKu3c4w8aEBKjfG115BthiG-JWV6irM93avjpLp50xfhYQ0o&usqp=CAU"
+                                class="card-img-top"
+                                alt="..."
+                                height="500"
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">Tom Smith</h5>
+                                <p class="card-text">Id:3</p>
+                                <p class="card-text">Age:25</p>
+                                <p class="card-text">Email:tom213smith@reqres.in</p>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                              <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw9i4A1Bczgogt97kwCbpf3jUc5Jtci7-i9ixl9IJHbA&s"
+                                class="card-img-top"
+                                alt="..."
+                                height="500"
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">Susan King</h5>
+                                <p class="card-text">Id:4</p>
+                                <p class="card-text">Age:35</p>
+                                <p class="card-text">Email:susanking03@reqres.in</p>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                              <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTm9KXq17YLdsyCoUB_Boqbtur__SkL8XQGuBw0vaAs9Jn57sAv1V-P7-JZJ3C_0KJO69U&usqp=CAU"
+                                class="card-img-top"
+                                alt="..."
+                                height="500"
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">Leah Young</h5>
+                                <p class="card-text">Id:5</p>
+                                <p class="card-text">Age:22</p>
+                                <p class="card-text">Email:leahyoung2134@reqres.in</p>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                              <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvVuvpJU9VziVLtsN6zGSTc0NerFEsd_sR_EibiHgaSQINh4ZiIYMbHIjypStRZR0TEgA&usqp=CAU"
+                                class="card-img-top"
+                                alt="..."
+                                height="500"
+                              />
+                              <div class="card-body">
+                                <h5 class="card-title">Oscar Moore</h5>
+                                <p class="card-text">Id:6</p>
+                                <p class="card-text">Age:29</p>
+                                <p class="card-text">Email:oscar01@reqres.in</p>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav>
+                        <ul class="pagination justify-content-center mt-3">
+                          <li class="page-item disabled" id="previous-btn">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                          </li>
+                          <li class="page-item active">
+                            <a class="page-link" href="#" data-page="1">1</a>
+                          </li>
+                          <li class="page-item">
+                            <a class="page-link" href="#" data-page="2">2</a>
+                          </li>
+                          <li class="page-item" id="next-btn">
+                            <a class="page-link" href="#">Next</a>
+                          </li>
+                        </ul>
+                      </nav>
+                </div>
+                <div class="tab-pane fade" id="tab-profile">
+                    <form class="needs-validation">
+                      <div class="mb-3">
+                        <label for="userName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="userName" required />
+                        <div class="invalid-feedback">Please provide a name.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="userSurname" class="form-label">Surname</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="userSurname"
+                          required
+                        />
+                        <div class="invalid-feedback">Please provide a surname.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="userAge" class="form-label">Age</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="userAge"
+                          required
+                        />
+                        <div class="invalid-feedback">Please provide a surname.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email address:</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="userEmail"
+                          required
+                        />
+                        <div class="invalid-feedback">Please provide a valid email.</div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="userPassword" class="form-label">Password: </label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="userPassword"
+                          required
+                        />
+                        <div class="invalid-feedback">Please provide a password.</div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+            </div>    
+        </div>
+    </body>
+</html>
